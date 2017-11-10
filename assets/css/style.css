@@ -1,0 +1,58 @@
+body {
+	width: 1000px;
+	margin: auto;
+	background-color: rgb(30,20,60);
+	color: rgb(180,230,230);
+}
+section {
+	background-color: rgb(20,40,20);
+	border: solid 3px rgb(100,100,150);
+	padding: 20px;
+}
+.left {
+	float: left;
+	width: 50%
+}
+.right {
+	float: right;
+	width: 40%;
+}
+img {
+	width: 100%;
+	height: auto;
+}
+p, ul {
+	color: rgb(150,150,200);
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 36px;
+	list-style: square;
+}
+#word {
+	font-size: 26px;
+	line-height: 36px;
+	font-family: monospace;
+	text-align: center;
+	margin: 25px;
+	padding: 10px;
+	border: solid white 2px;
+	color: rgb(100,255,100);
+	background-color: rgb(120,100,50);
+}
+#guesses, #usedLetters {
+	color: rgb(255,150,150);
+}
+h1 {
+	font-weight: bold;
+	font-size: 30px;
+	margin: 15px;
+	font-family: Verdana, Geneva, sans-serif;
+}
+h2 {
+	font-weight: bold;
+	font-size: 24px;
+	font-family: Verdana, Geneva, sans-serif;
+}
+button {
+	margin: 15px;
+}
