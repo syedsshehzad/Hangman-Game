@@ -1,4 +1,4 @@
-//create the object containing all guess words and their corresponding clues
+//Create the object containing all guess words and their corresponding clues
 
 var guessWords = [
 	{name: "RICHMOND",
@@ -50,26 +50,26 @@ var guessWords = [
 	fact: "Annually celebrates Oktoberfest"},
 ];
 
-//pressing the button will run a function to select one of the words defined above and initialize
+//Pressing the button will run a function to select one of the words defined above and initialize
 
-document.getElementById("button").onclick = function(){initialize(rdm);}
+document.getElementById("button").onclick = function(){initialize(id);}
 
-rdm=0;
+id = 0;
 var arr;
-var currentWord = guessWords[rdm].name;
+var currentWord = guessWords[id].name;
 
 
-function initialize(rdm) {
+function initialize(id) {
 	arr = [];
-	currentWord = guessWords[rdm].name;
+	currentWord = guessWords[id].name;
 	var clues = document.getElementById("clues");
 	clues.innerHTML = (
-		"<li>Located in: " + guessWords[rdm].cont + "</li>" +
-		"<li>Population: " + guessWords[rdm].pop + " million</li>" +
-		"<li>A company based there: " + guessWords[rdm].company + "</li>" +
-		"<li>A fact about it: " + guessWords[rdm].fact + "</li>"
+		"<li>Located in: " + guessWords[id].cont + "</li>" +
+		"<li>Population: " + guessWords[id].pop + " million</li>" +
+		"<li>A company based there: " + guessWords[id].company + "</li>" +
+		"<li>A fact about it: " + guessWords[id].fact + "</li>"
 	);
-	document.getElementById("image").innerHTML = '<img src="assets/images/' + guessWords[rdm].name + '.jpg">';
+	document.getElementById("image").innerHTML = '<img src="assets/images/' + guessWords[id].name + '.jpg">';
 	
 	for (var i = 0; i < currentWord.length; i++) {
 		arr[i] = "_";
@@ -84,92 +84,69 @@ function initialize(rdm) {
 
 console.log(guessWords);
 console.log(arr);
-console.log(guessWords[rdm].name);
+console.log(guessWords[id].name);
 console.log(currentWord.charAt(0));
-																						var usedLetters = []
-																						var j=0
-																					
-																						var test
+var usedLetters = [];
+var j = 0;
+var test;
 
 document.onkeyup = function(){inputLetter(arr, currentWord);}
 
 
+
+//Define the function which will run after doing the puzzle
+
+function next(result) {
+			test = confirm("YOU " + result + "! New try?");
+			if (test == true) {
+				id++;
+				console.log(test + " " + id + " " + currentWord);
+				j = 0;
+				initialize(id);
+				usedLetters = [];
+				document.getElementById("usedLetters").innerHTML = usedLetters;
+			} else {
+				alert("Quit")
+			}
+		}
+
+
+
+
 function inputLetter(arr, currentWord) {
-	if (j < 5) {
-    letter = String.fromCharCode(event.keyCode)
-    console.log('Event Char Code ' + event.keyCode );
-    console.log('Letter from Char code ' + letter);
-    for (var i = 0; i < arr.length; i++) {
-        if (currentWord.charAt(i) == letter && (usedLetters.indexOf(letter) == -1)) {
-        	arr[i] = currentWord.charAt(i);
-        }
-    }
-    if (currentWord.split("").indexOf(letter) == -1 && (usedLetters.indexOf(letter) == -1)) {
-    	guesses++;
-    	usedLetters[j] = letter;
-    	j = j + 1;
-    }
-	document.getElementById("word").innerHTML = arr.join(" ");
-	document.getElementById("guesses").innerHTML = 6 - guesses;
-	document.getElementById("usedLetters").innerHTML = usedLetters;
-	
+	if (j < 6) {
+	    letter = String.fromCharCode(event.keyCode)
+	    console.log('Event Char Code ' + event.keyCode );
+	    console.log('Letter from Char code ' + letter);
+	    for (var i = 0; i < arr.length; i++) {
+	        if (currentWord.charAt(i) == letter && (usedLetters.indexOf(letter) == -1)) {
+	        	arr[i] = currentWord.charAt(i);
+	        }
+	    }
+	    if (currentWord.split("").indexOf(letter) == -1 && (usedLetters.indexOf(letter) == -1)) {
+	    	guesses++;
+	    	usedLetters[j] = letter;
+	    	j = j + 1;
+	    }
+		document.getElementById("word").innerHTML = arr.join(" ");
+		document.getElementById("guesses").innerHTML = 6 - guesses;
+		document.getElementById("usedLetters").innerHTML = usedLetters;
+		
 
-	console.log("J" + j)
-	console.log(arr.join("") + " " + currentWord)
-	if (arr.join("") == currentWord) {
-		test = confirm("YOU WIN! New try?");
-		if (test == true) {
-			rdm++;
-			console.log(test + " " + rdm + " " + currentWord);
-			j = 0;
-			initialize(rdm);
-			usedLetters = [];
-			document.getElementById("usedLetters").innerHTML = usedLetters;
-		} else {
-			alert("Quit")
-		}
-	}
-}
-	
+		console.log("J" + j)
+		console.log(arr.join("") + " " + currentWord)
 
+		//Call the function defined in line 100
 
-
-
-	if (j > 4) {
-		test = confirm("YOU LOST! New try?");
-		if (test == true) {
-			rdm++;
-			console.log(test + " " + rdm + " " + currentWord);
-			j = 0;
-			initialize(rdm);
-			usedLetters = [];
-			document.getElementById("usedLetters").innerHTML = usedLetters;
-		} else {
-			alert("Quit")
+		if (arr.join("") == currentWord) {
+			result = "WIN";
+			setTimeout(function() {next(result)}, 800);		
 		}
 	}
 
-	
+	if (j > 5) {
+		result = "LOSE";
+		setTimeout(function() {next(result)}, 800);
+	}
+
 }
-
-
-
-
-
-
-
-
-
-//function pickWord(rdm) {
-//	var currentWord = guessWords[rdm].name;
-	var clues = document.getElementById("clues");
-//	clues.innerHTML = (
-		"<li>Located in: " + guessWords[rdm].cont + "</li>" +
-		"<li>Population: " + guessWords[rdm].pop + " million</li>" +
-		"<li>A company based there: " + guessWords[rdm].company + "</li>" +
-		"<li>A fact about it: " + guessWords[rdm].fact + "</li>"
-//	);
-	document.getElementById("image").innerHTML = '<img src="assets/images/' + guessWords[rdm].name + '.jpg">'
-//}
-
-//pickWord(2);
