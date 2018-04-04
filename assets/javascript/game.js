@@ -60,6 +60,9 @@ var currentWord = guessWords[id].name;
 
 
 function initialize(id) {
+	if (id == 8) {
+		document.getElementById("inst").innerHTML = "Game over!";
+	}
 	arr = [];
 	currentWord = guessWords[id].name;
 	var clues = document.getElementById("clues");
@@ -97,18 +100,18 @@ document.onkeyup = function(){inputLetter(arr, currentWord);}
 //Define the function which will run after doing the puzzle
 
 function next(result) {
-			test = confirm("YOU " + result + "! New try?");
-			if (test == true) {
-				id++;
-				console.log(test + " " + id + " " + currentWord);
-				j = 0;
-				initialize(id);
-				usedLetters = [];
-				document.getElementById("usedLetters").innerHTML = usedLetters;
-			} else {
-				alert("Quit")
-			}
-		}
+	test = confirm("YOU " + result + "! New try?");
+	if (test == true) {
+		id++;
+		console.log(test + " " + id + " " + currentWord);
+		j = 0;
+		initialize(id);
+		usedLetters = [];
+		document.getElementById("usedLetters").innerHTML = usedLetters;
+	} else {
+		alert("Quit")
+	}
+}
 
 
 
@@ -131,22 +134,22 @@ function inputLetter(arr, currentWord) {
 		document.getElementById("word").innerHTML = arr.join(" ");
 		document.getElementById("guesses").innerHTML = 6 - guesses;
 		document.getElementById("usedLetters").innerHTML = usedLetters;
-		
-
-		console.log("J" + j)
-		console.log(arr.join("") + " " + currentWord)
-
-		//Call the function defined in line 100
-
-		if (arr.join("") == currentWord) {
-			result = "WIN";
-			setTimeout(function() {next(result)}, 800);		
-		}
 	}
+
+
+
+
+	//Call the function defined in line 100
+
+	if (arr.join("") == currentWord && j < 6) {
+		result = "WIN";
+		setTimeout(function() {next(result)}, 200);		
+	}
+
 
 	if (j > 5) {
 		result = "LOSE";
-		setTimeout(function() {next(result)}, 800);
+		setTimeout(function() {next(result)}, 200);
 	}
 
 }

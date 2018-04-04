@@ -56,3 +56,17 @@ h2 {
 button {
 	margin: 15px;
 }
+
+/*Responsive Design*/
+@media screen and (max-width: 1000px) {
+	body {
+		width: 90%;
+		max-width: 700px;
+		margin: auto;
+	}
+	.left, .right {
+		float: none;
+		width: auto;
+		margin: 20px 0px;
+	}
+}
